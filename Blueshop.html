@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lintang Mart - Toko Kebutuhan Digital</title>
+    <style>
+        :root {
+            --primary: #1e88e5;
+            --primary-dark: #1565c0;
+            --primary-light: #bbdefb;
+            --accent: #ff9800;
+            --text: #212121;
+            --text-light: #757575;
+            --background: #f5f5f5;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--background);
+            color: var(--text);
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        nav {
+            background-color: var(--primary-dark);
+            padding: 0.5rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        nav ul li {
+            margin: 0 1rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .service-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .service-icon {
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+            font-size: 2rem;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .service-details {
+            padding: 1.5rem;
+        }
+        
+        .service-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-dark);
+        }
+        
+        .service-desc {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+        }
+        
+        .btn-accent:hover {
+            background-color: #f57c00;
+        }
+        
+        .section-title {
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-light);
+        }
+        
+        footer {
+            background-color: var(--primary-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 1rem;
+        }
+        
+        /* Chat Widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+        
+        .chat-btn {
+            background-color: var(--primary);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .chat-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .chat-box {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 350px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            overflow: hidden;
+            display: none;
+        }
+        
+        .chat-header {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .close-chat {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        .chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            padding: 1rem;
+            background-color: #f9f9f9;
+        }
+        
+        .message {
+            margin-bottom: 1rem;
+            max-width: 80%;
+            padding: 0.8rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .user-message {
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+            margin-left: auto;
+            border-bottom-right-radius: 0;
+        }
+        
+        .bot-message {
+            background-color: var(--white);
+            border: 1px solid #ddd;
+            margin-right: auto;
+            border-bottom-left-radius: 0;
+        }
+        
+        .chat-input {
+            display: flex;
+            padding: 0.5rem;
+            background-color: white;
+            border-top: 1px solid #eee;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+        }
+        
+        .send-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-left: 0.5rem;
+            cursor: pointer;
+        }
+        
+        /* Payment Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        
+        .modal-header {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+        }
+        
+        .payment-info {
+            background-color: #f5f9ff;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .payment-info p {
+            margin-bottom: 0.5rem;
+        }
+        
+        .payment-method {
+            margin-bottom: 1.5rem;
+        }
+        
+        .payment-method label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .payment-method select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.3rem;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .modal-footer {
+            padding: 1rem;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        @media (max-width: 768px) {
+            .services {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .chat-box {
+                width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">LINTANG MART</div>
+        <div class="tagline">Solusi Kebutuhan Digital Anda</div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#pulsa">Pulsa & Paket Data</a></li>
+            <li><a href="#token">Token Listrik</a></li>
+            <li><a href="#game">Top Up Game</a></li>
+            <li><a href="#ewallet">E-Wallet</a></li>
+            <li><a href="#bank">Bank & Pembayaran</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <h2 class="section-title">Layanan Kami</h2>
+        
+        <div class="services">
+            <!-- Pulsa & Paket Data -->
+            <div class="service-card" onclick="openModal('Pulsa & Paket Data')">
+                <div class="service-icon">
+                    <i>📱</i>
+                </div>
+                <div class="service-details">
+                    <h3 class="service-title">Pulsa & Paket Data</h3>
+                    <p class="service-desc">Isi pulsa semua operator dan beli paket internet dengan harga terjangkau.</p>
+                    <button class="btn">Beli Sekarang</button>
+                </div>
+            </div>
+            
+            <!-- Token Listrik -->
+            <div class="service-card" onclick="openModal('Token Listrik')">
+                <div class="service-icon">
+                    <i>⚡</i>
+                </div>
+                <div class="service-details">
+                    <h3 class="service-title">Token Listrik</h3>
+                    <p class="service-desc">Token PLN prabayar untuk semua daya. Proses cepat dan aman.</p>
+                    <button class="btn">Beli Sekarang</button>
+                </div>
+            </div>
+            
+            <!-- Top Up Game -->
+            <div class="service-card" onclick="openModal('Top Up Game')">
+                <div class="service-icon">
+                    <i>🎮</i>
+                </div>
+                <div class="service-details">
+                    <h3 class="service-title">Top Up Game</h3>
+                    <p class="service-desc">Diamond Mobile Legends, UC PUBG, Voucher Steam, dan banyak lagi.</p>
+                    <button class="btn">Beli Sekarang</button>
+                </div>
+            </div>
+            
+            <!-- E-Wallet -->
+            <div class="service-card" onclick="openModal('Top Up E-Wallet')">
+                <div class="service-icon">
+                    <i>💳</i>
+                </div>
+                <div class="service-details">
+                    <h3 class="service-title">Top Up E-Wallet</h3>
+                    <p class="service-desc">Saldo DANA, OVO, ShopeePay, LinkAja, dan dompet digital lainnya.</p>
+                    <button class="btn">Beli Sekarang</button>
+                </div>
+            </div>
+            
+            <!-- Bank & Pembayaran -->
+            <div class="service-card" onclick="openModal('Bank & Pembayaran')">
+                <div class="service-icon">
+                    <i>🏦</i>
+                </div>
+                <div class="service-details">
+                    <h3 class="service-title">Bank & Pembayaran</h3>
+                    <p class="service-desc">Transfer bank, bayar tagihan, dan layanan keuangan lainnya.</p>
+                    <button class="btn">Beli Sekarang</button>
+                </div>
+            </div>
+            
+            <!-- Voucher -->
+            <div class="service-card" onclick="openModal('Voucher Belanja')">
+                <div class="service-icon">
+                    <i>🛒</i>
+                </div>
+                <div class="service-details">
+                    <h3 class="service-title">Voucher Belanja</h3>
+                    <p class="service-desc">Voucher belanja online seperti Shopee, Tokopedia, Lazada, dll.</p>
+                    <button class="btn">Beli Sekarang</button>
+                </div>
+            </div>
+            
+            <!-- TV Berlangganan -->
+            <div class="service-card" onclick="openModal('TV Berlangganan')">
+                <div class="service-icon">
+                    <i>📺</i>
+                </div>
+                <div class="service-details">
+                    <h3 class="service-title">TV Berlangganan</h3>
+                    <p class="service-desc">Bayar tagihan MNC Vision, IndiHome, First Media, dan lainnya.</p>
+                    <button class="btn">Beli Sekarang</button>
+                </div>
+            </div>
+            
+            <!-- BPJS -->
+            <div class="service-card" onclick="openModal('BPJS Kesehatan')">
+                <div class="service-icon">
+                    <i>🏥</i>
+                </div>
+                <div class="service-details">
+                    <h3 class="service-title">BPJS Kesehatan</h3>
+                    <p class="service-desc">Pembayaran iuran BPJS Kesehatan untuk perorangan dan perusahaan.</p>
+                    <button class="btn">Beli Sekarang</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Chat Widget -->
+    <div class="chat-widget">
+        <div class="chat-btn" onclick="toggleChat()">💬</div>
+        <div class="chat-box" id="chatBox">
+            <div class="chat-header">
+                <span>Layanan Pelanggan</span>
+                <button class="close-chat" onclick="toggleChat()">×</button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot-message">
+                    Halo! Saya Lintang AI Assistant. Ada yang bisa saya bantu?
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="userInput" placeholder="Ketik pesan Anda..." onkeypress="handleKeyPress(event)">
+                <button class="send-btn" onclick="sendMessage()">→</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Payment Modal -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span id="modalTitle">Pembayaran</span>
+                <button class="close-modal" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="payment-info">
+                    <p><strong>Transfer ke:</strong></p>
+                    <p>Nomor: 0895321197390 (DANA)</p>
+                    <p>Atau melalui transfer bank:</p>
+                    <p>Bank: BCA</p>
+                    <p>Nomor Rekening: 1234567890</p>
+                    <p>Atas Nama: Lintang Satria</p>
+                    <p>Email: lintangsatria658@gmail.com</p>
+                </div>
+                
+                <div class="payment-method">
+                    <label for="paymentMethod">Metode Pembayaran:</label>
+                    <select id="paymentMethod">
+                        <option value="dana">DANA (0895321197390)</option>
+                        <option value="ovo">OVO</option>
+                        <option value="gopay">GoPay</option>
+                        <option value="shopee">ShopeePay</option>
+                        <option value="bca">Transfer Bank BCA</option>
+                        <option value="bri">Transfer Bank BRI</option>
+                        <option value="mandiri">Transfer Bank Mandiri</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="customerName">Nama Lengkap:</label>
+                    <input type="text" id="customerName" placeholder="Masukkan nama Anda">
+                </div>
+                
+                <div class="form-group">
+                    <label for="customerEmail">Email:</label>
+                    <input type="email" id="customerEmail" placeholder="Masukkan email Anda">
+                </div>
+                
+                <div class="form-group">
+                    <label for="customerPhone">Nomor HP:</label>
+                    <input type="tel" id="customerPhone" placeholder="Masukkan nomor HP">
+                </div>
+                
+                <div class="form-group">
+                    <label for="orderDetail">Detail Pesanan:</label>
+                    <input type="text" id="orderDetail" placeholder="Contoh: Token Listrik 100.000">
+                </div>
+                
+                <div class="form-group">
+                    <label for="paymentProof">Bukti Pembayaran (Screenshot):</label>
+                    <input type="file" id="paymentProof">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-accent" onclick="processPayment()">Konfirmasi Pembayaran</button>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-links">
+            <a href="#">Tentang Kami</a>
+            <a href="#">Kebijakan Privasi</a>
+            <a href="#">Syarat & Ketentuan</a>
+            <a href="#">Kontak</a>
+        </div>
+        <div class="copyright">
+            &copy; 2023 Lintang Mart. All rights reserved.
+        </div>
+    </footer>
+    
+    <script>
+        // Chat functionality
+        function toggleChat() {
+            const chatBox = document.getElementById('chatBox');
+            chatBox.style.display = chatBox.style.display === 'block' ? 'none' : 'block';
+        }
+        
+        function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const chatMessages = document.getElementById('chatMessages');
+            
+            if (userInput.value.trim() === '') return;
+            
+            // Add user message
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user-message';
+            userMessage.textContent = userInput.value;
+            chatMessages.appendChild(userMessage);
+            
+            // Clear input
+            const message = userInput.value;
+            userInput.value = '';
+            
+            // Scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Simulate bot response
+            setTimeout(() => {
+                const botMessage = document.createElement('div');
+                botMessage.className = 'message bot-message';
+                
+                // Simple AI responses
+                if (message.toLowerCase().includes('harga') || message.toLowerCase().includes('berapa')) {
+                    botMessage.textContent = 'Harga bervariasi tergantung produk. Silakan pilih layanan untuk melihat detail harga.';
+                } else if (message.toLowerCase().includes('pembayaran') || message.toLowerCase().includes('bayar')) {
+                    botMessage.textContent = 'Anda bisa membayar via DANA ke 0895321197390 atau transfer bank. Setelah transfer, kirim bukti ke lintangsatria658@gmail.com.';
+                } else if (message.toLowerCase().includes('token') || message.toLowerCase().includes('listrik')) {
+                    botMessage.textContent = 'Token listrik tersedia untuk semua daya. Silakan klik menu Token Listrik untuk memulai.';
+                } else if (message.toLowerCase().includes('pulsa') || message.toLowerCase().includes('paket')) {
+                    botMessage.textContent = 'Kami menyediakan pulsa dan paket data semua operator. Pilih menu Pulsa & Paket Data untuk melihat pilihan.';
+                } else if (message.toLowerCase().includes('game') || message.toLowerCase().includes('top up')) {
+                    botMessage.textContent = 'Top up game tersedia untuk Mobile Legends, PUBG, Free Fire, Valorant, dan banyak lagi. Pilih menu Top Up Game.';
+                } else {
+                    botMessage.textContent = 'Terima kasih atas pesan Anda. Untuk informasi lebih lanjut, silakan pilih layanan yang tersedia atau hubungi kami via email lintangsatria658@gmail.com.';
+                }
+                
+                chatMessages.appendChild(botMessage);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000);
+        }
+        
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        }
+        
+        // Modal functionality
+        function openModal(service) {
+            document.getElementById('modalTitle').textContent = `Pembayaran - ${service}`;
+            document.getElementById('orderDetail').placeholder = `Contoh: ${service} 100.000`;
+            document.getElementById('paymentModal').style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+        
+        function processPayment() {
+            const service = document.getElementById('modalTitle').textContent.replace('Pembayaran - ', '');
+            const method = document.getElementById('paymentMethod').value;
+            const name = document.getElementById('customerName').value;
+            const email = document.getElementById('customerEmail').value;
+            const phone = document.getElementById('customerPhone').value;
+            const detail = document.getElementById('orderDetail').value;
+            
+            if (!name || !email || !phone || !detail) {
+                alert('Harap lengkapi semua data!');
+                return;
+            }
+            
+            // In a real app, you would send this data to your server
+            alert(`Pembayaran untuk ${service} telah dikonfirmasi. Bukti pembayaran telah dikirim ke ${email}. Terima kasih!`);
+            
+            // Simulate sending email receipt
+            const emailContent = `
+                <h2>Terima kasih atas pembelian Anda di Lintang Mart</h2>
+                <p><strong>Detail Pesanan:</strong></p>
+                <p>Layanan: ${service}</p>
+                <p>Detail: ${detail}</p>
+                <p>Metode Pembayaran: ${method}</p>
+                <p>Nama: ${name}</p>
+                <p>Email: ${email}</p>
+                <p>Nomor HP: ${phone}</p>
+                <p>Total Pembayaran: Rp100.000</p>
+                <p>Status: Menunggu verifikasi</p>
+                <p>Silakan tunggu konfirmasi via WhatsApp atau email dalam 1x24 jam.</p>
+                <p>Jika ada pertanyaan, hubungi kami di:</p>
+                <p>WhatsApp: 0895321197390</p>
+                <p>Email: lintangsatria658@gmail.com</p>
+            `;
+            
+            console.log('Email receipt sent:', emailContent);
+            
+            closeModal();
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('paymentModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+  </html>
